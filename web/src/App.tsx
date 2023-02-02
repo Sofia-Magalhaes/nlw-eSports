@@ -1,8 +1,8 @@
 // JSX: Javascript + XML(HTML) -> escrever HTML diretamente do JS
-import "./styles.css";
+import "./styles/main.css";
 
 function App() {
-  return <div></div>;
+  return (<div></div>);
 }
 
 export default App;
