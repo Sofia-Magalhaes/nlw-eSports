@@ -20,8 +20,9 @@
  */
 
 import express from 'express'
+import cors from 'cors'
+
 import { PrismaClient } from '@prisma/client'
-import { Select } from '@material-ui/core';
 import { convertHourStringToMinutes } from './utils/convert-hours-string-to-minutes';
 import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string';
 
@@ -29,6 +30,7 @@ import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-stri
 const app = express()
 
 app.use(express.json());
+app.use(cors())
 
 //Faz conexão automatica com o banco de dados
 const prisma = new PrismaClient({
