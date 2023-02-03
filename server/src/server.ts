@@ -19,14 +19,21 @@
  * Não fica na URL, fica escondido.
  */
 
-import express, { request, response } from 'express'
+import express from 'express'
+import  {PrismaClient} from '@prisma/client'
+
 
 const app = express()
+//Faz conexão automatica com o banco de dados
+const prisma = new PrismaClient({
+  log: ['query']
+})
 
 
+app.get('/games', async (request, response) => {
+  const games = await prisma.game.findMany()
 
-app.get('/games', (request, response) => {
-  return response.json([]);
+  return response.json(games);
 });
 
 app.post('/ads', (request, response) => {
