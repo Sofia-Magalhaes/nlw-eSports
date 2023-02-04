@@ -4,6 +4,8 @@ import { Input } from "./Form/Input";
 
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
+import * as Select from "@radix-ui/react-select";
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 
 export function CreateAdModal() {
   return (
@@ -20,9 +22,43 @@ export function CreateAdModal() {
             <label htmlFor="game" className="font-semibold">
               Qual o game?
             </label>
-            <select id="game" className="bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 appearance-none">
-                <option disabled selected value="">Selecione o game que deseja jogar</option>
-            </select>
+
+            <Select.Root>
+    <Select.Trigger className="SelectTrigger" aria-label="Food">
+      <Select.Value placeholder="Select a fruit…" />
+      <Select.Icon className="SelectIcon">
+        <ChevronDownIcon />
+      </Select.Icon>
+    </Select.Trigger>
+    <Select.Portal>
+      <Select.Content className="SelectContent">
+        <Select.ScrollUpButton className="SelectScrollButton">
+          <ChevronUpIcon />
+        </Select.ScrollUpButton>
+        <Select.Viewport className="SelectViewport">
+          <Select.Group>
+      
+          </Select.Group>
+
+          <Select.Separator className="SelectSeparator" />
+
+          <Select.Group>
+            
+          </Select.Group>
+
+          <Select.Separator className="SelectSeparator" />
+
+          <Select.Group>
+        
+          </Select.Group>
+
+        </Select.Viewport>
+        <Select.ScrollDownButton className="SelectScrollButton">
+          <ChevronDownIcon />
+        </Select.ScrollDownButton>
+      </Select.Content>
+    </Select.Portal>
+  </Select.Root>
           </div>
 
           <div className="flex flex-col gap-2">
@@ -84,9 +120,9 @@ export function CreateAdModal() {
 
           <div className="mt-2 flex items-center gap-2 text-sm">
             <Checkbox.Root className="w-6 h-6 p-1 rounded bg-zinc-900">
-                <Checkbox.Indicator>
-                    <Check className="w-4 h-4 text-emerald-400"/>
-                </Checkbox.Indicator>
+              <Checkbox.Indicator>
+                <Check className="w-4 h-4 text-emerald-400" />
+              </Checkbox.Indicator>
             </Checkbox.Root>
             Costumo me conectar ap chat de voz
           </div>
