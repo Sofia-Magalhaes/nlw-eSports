@@ -1,13 +1,28 @@
+import { useState,useEffect } from "react";
+
 import { Check, GameController } from "phosphor-react";
 
 import { Input } from "./Form/Input";
 
 import * as Dialog from "@radix-ui/react-dialog";
 import * as Checkbox from "@radix-ui/react-checkbox";
-import * as Select from "@radix-ui/react-select";
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+
+interface Game {
+  id: string;
+  title: string;
+}
 
 export function CreateAdModal() {
+  const [games, setGames] = useState<Game[]>([]);
+
+  useEffect(() => {
+    fetch(" http://localhost:3333/games")
+      .then((response) => response.json())
+      .then((data) => {
+        setGames(data);
+      });
+  }, []);
+
   return (
     <Dialog.Portal>
       <Dialog.Overlay className="bg-black/60 inset-0 fixed" />
@@ -22,43 +37,15 @@ export function CreateAdModal() {
             <label htmlFor="game" className="font-semibold">
               Qual o game?
             </label>
-
-            <Select.Root>
-    <Select.Trigger className="SelectTrigger" aria-label="Food">
-      <Select.Value placeholder="Select a fruit…" />
-      <Select.Icon className="SelectIcon">
-        <ChevronDownIcon />
-      </Select.Icon>
-    </Select.Trigger>
-    <Select.Portal>
-      <Select.Content className="SelectContent">
-        <Select.ScrollUpButton className="SelectScrollButton">
-          <ChevronUpIcon />
-        </Select.ScrollUpButton>
-        <Select.Viewport className="SelectViewport">
-          <Select.Group>
-      
-          </Select.Group>
-
-          <Select.Separator className="SelectSeparator" />
-
-          <Select.Group>
-            
-          </Select.Group>
-
-          <Select.Separator className="SelectSeparator" />
-
-          <Select.Group>
-        
-          </Select.Group>
-
-        </Select.Viewport>
-        <Select.ScrollDownButton className="SelectScrollButton">
-          <ChevronDownIcon />
-        </Select.ScrollDownButton>
-      </Select.Content>
-    </Select.Portal>
-  </Select.Root>
+            <select
+              id="game"
+              className=" bg-zinc-900 py-3 px-4 rounded text-sm placeholder:text-zinc-500 appearance-none"
+            >
+              <option disabled selected value="">Selecione o game que deseja jogar</option>
+              {games.map(game => {
+                return <option key={game.id} value={game.id}>{game.title}</option>                
+              })}
+            </select>
           </div>
 
           <div className="flex flex-col gap-2">
