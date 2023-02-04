@@ -30,8 +30,7 @@ export function Game() {
   useEffect(() => {
     fetch(`http://192.168.0.99:3333/games/${game.id}/ads`)
       .then((response) => response.json())
-      .then((data) => setDuos(data)
-      );
+      .then((data) => setDuos(data));
   }, []);
 
   return (
@@ -58,9 +57,15 @@ export function Game() {
         />
         <Heading title={game.title} subtitle="Conecte-se e comece a jogar!" />
 
-        <FlatList data={duos} keyExtractor={item => item.id} renderItem={({item}) => (
-          <DuoCard data={item}/>
-        )}/>
+        <FlatList
+          data={duos}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <DuoCard data={item} onConnect={() =>{}}/>}
+          horizontal
+          style={styles.containerList}
+          contentContainerStyle={styles.contentList}
+          showsHorizontalScrollIndicator={false}
+        />
       </SafeAreaView>
     </Background>
   );
