@@ -1,6 +1,10 @@
 # nlw-eSports
 Rocketseat NLW eSports
 
+### Projeto no Figma
+https://www.figma.com/file/l5cAMbmJIZzqZClvPfrhoM/NLW-eSports-(Community)?node-id=1%3A640&t=glcMcLyc5NjDLzT0-0
+
+
 ### Página Inicial
 ![opera_Cevj7mBk9h](https://user-images.githubusercontent.com/52801509/216736132-7bcbe902-605c-4df1-b751-c62287ffde46.png)
 
