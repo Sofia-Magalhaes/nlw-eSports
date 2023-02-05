@@ -35,7 +35,7 @@ export function CreateAdModal() {
     }
 
     try {
-      const response = await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+      await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
         name: data.name,
         yearsPlaying: Number(data.yearsPlaying),
         discord: data.discord,
@@ -44,7 +44,7 @@ export function CreateAdModal() {
         hourEnd: data.hourEnd,
         useVoiceChannel: useVoiceChannel,
       });
-
+                  
       alert('Anúncio criado com sucesso!');
     } catch (err) {
       console.log(err);
