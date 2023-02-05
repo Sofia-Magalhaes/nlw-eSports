@@ -36,4 +36,11 @@ Como o usuario vai utilizar a aplicação?
 - Listagem de anúncios por game
 - Buscar discord pelo ID do anúncio
 
-
+# Melhorar aplicação WEB 
+- Responsividade
+- Carousel para os games
+  - Keen Slider (biblioteca de carousel)
+- Dentro do Modal usar o RadiUI no select 
+- Validação (Ex: Borda verde/vermelha) (bibliote de validação)
+  - React Hook Form (Schema Validation)
+- Autenticação (Logar com Discord ou Twitch)
