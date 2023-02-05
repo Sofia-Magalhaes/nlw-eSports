@@ -8,6 +8,9 @@ https://www.figma.com/file/l5cAMbmJIZzqZClvPfrhoM/NLW-eSports-(Community)?node-i
 ### Página Inicial
 ![opera_Cevj7mBk9h](https://user-images.githubusercontent.com/52801509/216736132-7bcbe902-605c-4df1-b751-c62287ffde46.png)
 
+### Projeto Final WEB
+![opera_5XgIUa3KWM](https://user-images.githubusercontent.com/52801509/216851780-36c67f6a-df2a-4445-990c-1e05539a060c.gif)
+
 
 # Projeto - API RESTful + SPA
 Back-end -> Programado em node
