@@ -1,14 +1,12 @@
-import axios from "axios";
-
-import { useState, useEffect, FormEvent } from "react";
-
 import { Check, GameController } from "phosphor-react";
 
-import { Input } from "./Form/Input";
+import * as Dialog from '@radix-ui/react-dialog';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import * as ToggleGroup from '@radix-ui/react-toggle-group';
 
-import * as Dialog from "@radix-ui/react-dialog";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import { Input } from "./Form/Input";
+import { FormEvent, useEffect, useState } from "react";
+import axios from "axios";
 
 interface Game {
   id: string;
@@ -21,20 +19,39 @@ export function CreateAdModal() {
   const [useVoiceChannel, setUseVoiceChannel] = useState(false);
 
   useEffect(() => {
-    axios(" http://localhost:3333/games").then((response) =>{     
-      setGames(response.data)
-      })
+    axios('http://localhost:3333/games').then(response => {
+      setGames(response.data);
+    });
   }, []);
 
-  function handleCreateAd(event: FormEvent) {
-    event.preventDefault();
+  async function handleCreateAd(event: FormEvent) {
+    event.preventDefault()
+
     const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
 
-    console.log(data);
-    console.log(weekDays);
-    console.log(useVoiceChannel);
+    if (!data.name) {
+      return;
+    }
+
+    try {
+      const response = await axios.post(`http://localhost:3333/games/${data.game}/ads`, {
+        name: data.name,
+        yearsPlaying: Number(data.yearsPlaying),
+        discord: data.discord,
+        weekDays: weekDays.map(Number),
+        hoursStart: data.hoursStart,
+        hourEnd: data.hourEnd,
+        useVoiceChannel: useVoiceChannel,
+      });
+
+      alert('Anúncio criado com sucesso!');
+    } catch (err) {
+      console.log(err);
+      alert('Erro ao criar anúncio!');
+    }
   }
+
 
   return (
     <Dialog.Portal>

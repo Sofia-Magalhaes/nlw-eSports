@@ -1,42 +1,20 @@
-//ECMAScript Modules
+import express from 'express';
+import cors from 'cors';
 
-// HTTP methods / API RESTful / HTTP Codes (mostra se a resposta que se recebe é valida ou não)
+import { PrismaClient } from '@prisma/client';
+import { convertHourStringToMinutes } from "./utils/convert-hours-string-to-minutes";
+import { convertMinutesToHourString } from "./utils/convert-minutes-to-hour-string";
 
-// status que começa com: 2 (sucesso), 3 (redirecionamento), 4 (erro por código errado), 5 (erro inesperado)
-
-// GET(buscar informação), 
-// POST(criar algo),
-// PUT(editar uma entidade),
-// PATCH(editar uma informação especifica de uma entidade),
-// DELETE(remover alguama entidade)
-
-// Tipos de parâmetros
-/**
- * Query: Vem atraves do ponto de interrogação (precisa persistir estado) usado para filtros, ordenação,
- *  paginação, coisas que não são sensiveis(senha). São sempre nomeados. Parametro de URL
- * Route: É também um parametro de URL, não são nomeados. Reconhecido só de olhar
- * Body: Usado quando se vai mandar varios dados para uma única requisição (geralmente para envio de formulário). 
- * Não fica na URL, fica escondido.
- */
-
-import express from 'express'
-import cors from 'cors'
-
-import { PrismaClient } from '@prisma/client'
-import { convertHourStringToMinutes } from './utils/convert-hours-string-to-minutes';
-import { convertMinutesToHourString } from './utils/convert-minutes-to-hour-string';
-
-
-const app = express()
+const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-//Faz conexão automatica com o banco de dados
+app.listen(3333);
+
 const prisma = new PrismaClient({
-  log: ['query']
-})
-
+  log: ['query'],
+});
 
 app.get('/games', async (request, response) => {
   const games = await prisma.game.findMany({
@@ -47,17 +25,14 @@ app.get('/games', async (request, response) => {
         }
       }
     }
-  })
+  });
 
   return response.json(games);
 });
 
 app.post('/games/:id/ads', async (request, response) => {
   const gameId = request.params.id;
-  const body:any = request.body;
-
-  //Validação (biblioteca Zod javascript)
-  
+  const body: any = request.body;
 
   const ad = await prisma.ad.create({
     data: {
@@ -69,12 +44,10 @@ app.post('/games/:id/ads', async (request, response) => {
       hoursStart: convertHourStringToMinutes(body.hoursStart),
       hourEnd: convertHourStringToMinutes(body.hourEnd),
       useVoiceChannel: body.useVoiceChannel,
-    }
-  })
-
+    },
+  })  
   return response.status(201).json(ad);
 });
-
 
 app.get('/games/:id/ads', async (request, response) => {
   const gameId = request.params.id;
@@ -93,19 +66,19 @@ app.get('/games/:id/ads', async (request, response) => {
       gameId,
     },
     orderBy: {
-      createdAt: 'desc',
+      createdAt: 'desc'
     }
   })
 
-  return response.send(ads.map(ad => {
+  return response.json(ads.map(ad => {
     return {
       ...ad,
       weekDays: ad.weekDays.split(','),
-      hoursStart: convertMinutesToHourString(ad.hoursStart),
+      hourStart: convertMinutesToHourString(ad.hoursStart),
       hourEnd: convertMinutesToHourString(ad.hourEnd),
     }
-  }))
-})
+  }));
+});
 
 app.get('/ads/:id/discord', async (request, response) => {
   const adId = request.params.id;
@@ -117,11 +90,10 @@ app.get('/ads/:id/discord', async (request, response) => {
     where: {
       id: adId,
     }
-  })
+  });
 
-  return response.send({
+  return response.json({
     discord: ad.discord,
   })
-})
+});
 
-app.listen(3333)
