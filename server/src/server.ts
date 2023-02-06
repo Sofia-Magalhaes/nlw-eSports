@@ -10,8 +10,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.listen(3333);
-
 const prisma = new PrismaClient({
   log: ['query'],
 });
@@ -45,7 +43,8 @@ app.post('/games/:id/ads', async (request, response) => {
       hourEnd: convertHourStringToMinutes(body.hourEnd),
       useVoiceChannel: body.useVoiceChannel,
     },
-  })  
+  })
+
   return response.status(201).json(ad);
 });
 
@@ -74,7 +73,7 @@ app.get('/games/:id/ads', async (request, response) => {
     return {
       ...ad,
       weekDays: ad.weekDays.split(','),
-      hourStart: convertMinutesToHourString(ad.hoursStart),
+      hoursStart: convertMinutesToHourString(ad.hoursStart),
       hourEnd: convertMinutesToHourString(ad.hourEnd),
     }
   }));
@@ -97,3 +96,4 @@ app.get('/ads/:id/discord', async (request, response) => {
   })
 });
 
+app.listen(3333);
