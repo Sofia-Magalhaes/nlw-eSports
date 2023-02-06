@@ -47,3 +47,14 @@ Como o usuario vai utilizar a aplicação?
 - Validação (Ex: Borda verde/vermelha) (bibliote de validação)
   - React Hook Form (Schema Validation)
 - Autenticação (Logar com Discord ou Twitch)
+
+# Melhorar aplicação MOBILE
+- Colocar notificação (Expo notification)
+ - Avisar que novos anúncios foram criados ou avisar quando um anúncio de um jogo que o usuário gosta foi criado
+ - curl -H "Content-Type: application/json" -X POST "https://exp.host/--/api/v2/push/send" -d '{
+  "to": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
+  "title":"hello",
+  "body": "world"
+}'
+
+
