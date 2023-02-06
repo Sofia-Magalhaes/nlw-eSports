@@ -50,8 +50,8 @@ Como o usuario vai utilizar a aplicação?
 
 # Melhorar aplicação MOBILE
 - Colocar notificação (Expo notification)
- - Avisar que novos anúncios foram criados ou avisar quando um anúncio de um jogo que o usuário gosta foi criado
- - curl -H "Content-Type: application/json" -X POST "https://exp.host/--/api/v2/push/send" -d '{
+  - Avisar que novos anúncios foram criados ou avisar quando um anúncio de um jogo que o usuário gosta foi criado
+  - curl -H "Content-Type: application/json" -X POST "https://exp.host/--/api/v2/push/send" -d '{
   "to": "ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]",
   "title":"hello",
   "body": "world"
