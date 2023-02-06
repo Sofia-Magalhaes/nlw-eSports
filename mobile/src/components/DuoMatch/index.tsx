@@ -14,7 +14,7 @@ interface Props extends ModalProps {
 
 export function DuoMatch({ discord, OnClose, ...rest }: Props) {
   return (
-    <Modal {...rest} transparent statusBarTranslucent>
+    <Modal {...rest} transparent statusBarTranslucent animationType="fade">
       <View style={styles.container}>
         <View style={styles.content}>
           <TouchableOpacity style={styles.closeIcon} onPress={OnClose}>
